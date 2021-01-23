@@ -1,8 +1,8 @@
 package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
-import org.assertj.core.api.Assertions;
 import hello.hellospring.repository.MemoryMemberRepository;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,16 +28,16 @@ class MemberServiceTest {
 
     @Test
     void 회원가입() {
-        // given
+        // given (~가 주어졌을 때)
         Member member = new Member();
         member.setName("hello");
 
-        // when
+        // when (~가를 실행했을 때)
         Long saveId = memberService.join(member);
 
-        // then
+        // then (결과가 ~가 나와야 한다. 즉, 검증)
         Member findMember = memberService.findOne(saveId).get();
-        Assertions.assertThat(member.getName()).isEqualTo(findMember.getName());
+        assertThat(member.getName()).isEqualTo(findMember.getName());
     }
 
     @Test
@@ -69,9 +69,11 @@ class MemberServiceTest {
 
     @Test
     void findMembers() {
+
     }
 
     @Test
     void findOne() {
+
     }
 }
