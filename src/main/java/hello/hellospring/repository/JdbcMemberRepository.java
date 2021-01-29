@@ -10,10 +10,13 @@ import java.util.List;
 import java.util.Optional;
 
 public class JdbcMemberRepository implements MemberRepository {
+
     private final DataSource dataSource;
+
     public JdbcMemberRepository(DataSource dataSource) {
         this.dataSource = dataSource;
     }
+
     @Override
     public Member save(Member member) {
         String sql = "insert into member(name) values(?)";
@@ -39,6 +42,7 @@ public class JdbcMemberRepository implements MemberRepository {
             close(conn, pstmt, rs);
         }
     }
+
     @Override
     public Optional<Member> findById(Long id) {
         String sql = "select * from member where id = ?";
@@ -64,6 +68,7 @@ public class JdbcMemberRepository implements MemberRepository {
             close(conn, pstmt, rs);
         }
     }
+
     @Override
     public List<Member> findAll() {
         String sql = "select * from member";
@@ -88,6 +93,7 @@ public class JdbcMemberRepository implements MemberRepository {
             close(conn, pstmt, rs);
         }
     }
+
     @Override
     public Optional<Member> findByName(String name) {
         String sql = "select * from member where name = ?";
@@ -112,9 +118,11 @@ public class JdbcMemberRepository implements MemberRepository {
             close(conn, pstmt, rs);
         }
     }
+
     private Connection getConnection() {
         return DataSourceUtils.getConnection(dataSource);
     }
+
     private void close(Connection conn, PreparedStatement pstmt, ResultSet rs)
     {
         try {
@@ -139,6 +147,7 @@ public class JdbcMemberRepository implements MemberRepository {
             e.printStackTrace();
         }
     }
+
     private void close(Connection conn) throws SQLException {
         DataSourceUtils.releaseConnection(conn, dataSource);
     }
